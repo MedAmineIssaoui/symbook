@@ -1,20 +1,42 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello UserController!{% endblock %}
+{% block title %}Utilisateurs{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+<div class="contrainer">
+<table>
+<tr>
+<td>id</td>
+<td>email</td>
+<td>nom</td>
+<td>prenom</td>
+<td>role</td>
+<td>action</td>
+</tr>
+{% for user in users %}
+<tr>
+    <td>{{user.id}}</td>
+    <td>{{user.email}}</td>
+    <td>{{user.firstname}}</td>
+    <td>{{user.lastname}}</td>
+    <td>
+      {% for role in user.roles %}
+      {{role}}
+     {% endfor %}</td>
+    <td>
+    {% if ('ROLE_ADMIN' in user.roles)== false %}
+          <a onclick="return confirm ('voulez-vous vraiùent affecter le role d'admin')" class=" btn btn-outline primary" href="{{path('app_user_to_editor',{'id':user.id})}}"> ajouter comme admin </a>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    {% endif %}
+    <a href=""></a>
+    <a href="" class="btn-danger">Supprimer</a>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>C:/xampp/htdocs/atelier/Symbook2/src/Controller/UserController.php</code></li>
-        <li>Your template at <code>C:/xampp/htdocs/atelier/Symbook2/templates/user/index.html.twig</code></li>
-    </ul>
+    
+    </td>
+</tr>
+{% endfor %}
+</table>
 </div>
+
+
 {% endblock %}

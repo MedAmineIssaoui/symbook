@@ -66,7 +66,7 @@ class LivresController extends AbstractController
 
         $em->remove($livre);
         $em->flush();
-        dd($livre);
+        return $this->redirectToRoute('admin_livres');
     }
     #[Route('/admin/livres/add', name: 'admin_livres_add')]
     public function add(EntityManagerInterface $em, Request $request): Response
